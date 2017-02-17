@@ -23,9 +23,6 @@ public:
 
 	virtual bool OnInit();
 
-	void OnCalculate(wxCommandEvent& event);
-
-	void OnClear(wxCommandEvent& event);
 
 	wxDECLARE_EVENT_TABLE();
 
@@ -39,6 +36,12 @@ private:
 	void OnTkTextChanged(wxCommandEvent& event);
 	void OnEpsTextChanged(wxCommandEvent& event);
 	void OnNTextChanged(wxCommandEvent& event);
+	void OnCalculate(wxCommandEvent& event);
+	void OnClear(wxCommandEvent& event);
+
+
+
+
 };
 
 

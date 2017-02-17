@@ -14,6 +14,9 @@ class MainWindow: public wxFrame
 	XYChart* m_pY1_XYChart;
 	XYChart* m_pY2_XYChart;
 
+	wxStaticText* m_pStatPointText;
+
+
 
 public:
 	MainWindow(const wxString& title, const wxPoint& pos, const wxSize& size);
@@ -26,7 +29,6 @@ private:
 	void OnShowY1Plot(wxCommandEvent& event);
 	void OnShowY2Plot(wxCommandEvent& event);
 	void OnShowY1Y2Plot(wxCommandEvent& event);
-
 
 
 public:
@@ -63,6 +65,20 @@ public:
 		else
 			m_pY2_XYChart->SaveScreenshot(filename);
 	}
+
+	void SetStatPoint(double y1, double y2)
+	{
+		wxString str = wxString::Format(wxT("Stationary point:\ny1 = %f\ny2 = %f"), y1, y2);
+		m_pStatPointText->SetLabel(str);
+	}
+
+
+	void ErrorDialog()
+	{
+		wxMessageDialog errorDialog(this, "ERROR!", wxMessageBoxCaptionStr);
+		errorDialog.ShowModal();
+	}
+
 
 	wxDECLARE_EVENT_TABLE();
 };

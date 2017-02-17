@@ -24,37 +24,27 @@ Application::~Application()
 
 bool Application::OnInit()
 {
-	m_pFrame = new MainWindow( "Hello World", wxPoint(50, 50), wxSize(800, 600) );
+	m_pFrame = new MainWindow( "Culture Evolution Model", wxPoint(50, 50), wxSize(800, 600) );
 	m_pFrame->Show( true );
 	m_pFrame->SetBackgroundColour(wxColour(220, 220, 220));
-
-
 
 	return true;
 }
 
 void Application::OnCalculate(wxCommandEvent &event)
 {
-
-//	CultureEvolutionModel* ceModel;
-
-/*	if(firstSolution.empty())
+	if((m_A1 == 0) || (m_A2 == 0) || (m_B1 == 0) || (m_B2 == 0))
 	{
-		ceModel = new CultureEvolutionModel(m_pFrame->A1(), m_pFrame->A2(), m_pFrame->B1(), m_pFrame->B2(),
-												 m_pFrame->B2() / m_pFrame->A2() + m_pFrame->Eps(),
-												 m_pFrame->B1() / m_pFrame->A1() + m_pFrame->Eps());
+		m_pFrame->ErrorDialog();
+		return;
+	}
 
-	} */
-/*	else
-	{
-		 ceModel = new CultureEvolutionModel(m_pFrame->A1(), m_pFrame->A2(), m_pFrame->B1(), m_pFrame->B2(),
-												 firstSolution.back(),
-												 secondSolution.back());
-	} */
+	CultureEvolutionModel* ceModel = new CultureEvolutionModel(m_A1, m_A2, m_B1, m_B2,
+															   m_B2 / m_A2 + m_eps,
+															   m_B1 / m_A1 + m_eps);
 
-	auto ceModel = new CultureEvolutionModel(m_A1, m_A2, m_B1, m_B2,
-											 m_B2 / m_A2 + m_eps,
-											 m_B1 / m_A1 + m_eps);
+
+	m_pFrame->SetStatPoint(m_B2/m_A2, m_B1/m_A1);
 
 	auto rkMeth = new RungeKuttaMethod(m_N, m_Tn, m_Tk, ceModel);
 
@@ -62,21 +52,8 @@ void Application::OnCalculate(wxCommandEvent &event)
 
 	rkMeth->Solve(y1, y2);
 
-/*	if(firstSolution.empty())
-	{
-		firstSolution = y1;
-		secondSolution = y2;
-	}
-	else
-	{
-		firstSolution.pop_back();
-		secondSolution.pop_back();
-		firstSolution.insert(firstSolution.end(), y1.begin(), y1.end());
-		secondSolution.insert(secondSolution.end(), y2.begin(), y2.end());
-	}*/
 
 	auto y1y2Func = new mpFXYVector();
-	//y1y2Func->SetData(firstSolution, secondSolution);
 	y1y2Func->SetData(y1, y2);
 	y1y2Func->SetContinuity(true);
 	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
@@ -156,3 +133,4 @@ void Application::OnNTextChanged(wxCommandEvent &event)
 {
 	m_N = static_cast<unsigned>(wxAtoi(event.GetString()));
 }
+
