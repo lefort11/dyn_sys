@@ -85,10 +85,11 @@ public:
 enum ID
 {
 	ID_RECALCULATE,
-	ID_A1_BOX,
-	ID_B1_BOX,
-	ID_A2_BOX,
-	ID_B2_BOX,
+	ID_E1_BOX,
+	ID_E2_BOX,
+	ID_R_BOX,
+	ID_V0_BOX,
+	ID_C_BOX,
 	ID_EPS_BOX,
 	ID_TN_BOX,
 	ID_TK_BOX,

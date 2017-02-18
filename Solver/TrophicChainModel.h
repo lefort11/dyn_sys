@@ -49,33 +49,33 @@ public:
 
 };
 
-class CultureEvolutionModel: public Model
+class TrophicChainModel: public Model
 {
-	double m_A1, m_A2, m_B1, m_B2;
+	double m_E1, m_R, m_E2, m_V0, m_C;
 
 
 public:
-	CultureEvolutionModel(double A1, double A2, double B1, double B2, double y1_0, double y2_0):
+	TrophicChainModel(double E1, double E2, double R, double V0, double C, double y1_0, double y2_0):
 			Model(y1_0, y2_0),
-			m_A1(A1), m_A2(A2), m_B1(B1), m_B2(B2)
+			m_E1(E1), m_E2(E2), m_R(R), m_V0(V0), m_C(C)
 	{
-		m_f1 = [A1, B1](double t, double y1, double y2)
+		m_f1 = [E1, V0, R, C](double t, double y1, double y2)
 		{
-			return y1 * (A1 * y2 - B1);
+			return y1 * (-E1 + V0 * (C - y1 - y2) - y2/(R+y1));
 		};
 
-		m_f2 = [A2, B2](double t, double y1, double y2)
+		m_f2 = [E2, R](double t, double y1, double y2)
 		{
-			return y2 * (A2 * y1 - B2);
+			return y2 * (-E2 + y1/(R+y1));
 		};
 	}
 
-	~CultureEvolutionModel()
+	~TrophicChainModel()
 	{}
 
 
-
 };
+
 
 
 #endif //DYN_SYS_CULTUREEVOLUTIONMODEL_H

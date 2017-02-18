@@ -3,7 +3,7 @@
 
 #include <wx/wx.h>
 #include "GUI/Window.h"
-#include "Solver/CultureEvolutionModel.h"
+#include "Solver/TrophicChainModel.h"
 #include "Solver/RungeKuttaMethod.h"
 
 
@@ -13,7 +13,7 @@ class Application: public wxApp
 
 	std::vector<double> firstSolution, secondSolution;
 
-	double m_A1, m_A2, m_B1, m_B2, m_eps, m_Tn, m_Tk;
+	double m_E1, m_R, m_E2, m_V0, m_eps, m_Tn, m_Tk, m_C;
 	unsigned m_N;
 
 public:
@@ -28,13 +28,14 @@ public:
 
 private:
 
-	void OnA1TextChanged(wxCommandEvent& event);
-	void OnA2TextChanged(wxCommandEvent& event);
-	void OnB1TextChanged(wxCommandEvent& event);
-	void OnB2TextChanged(wxCommandEvent &event);
+	void OnE1TextChanged(wxCommandEvent &event);
+	void OnRTextChanged(wxCommandEvent &event);
+	void OnE2TextChanged(wxCommandEvent &event);
+	void OnV0TextChanged(wxCommandEvent &event);
 	void OnTnTextChanged(wxCommandEvent& event);
 	void OnTkTextChanged(wxCommandEvent& event);
 	void OnEpsTextChanged(wxCommandEvent& event);
+	void OnCTextChanged(wxCommandEvent& event);
 	void OnNTextChanged(wxCommandEvent& event);
 	void OnCalculate(wxCommandEvent& event);
 	void OnClear(wxCommandEvent& event);

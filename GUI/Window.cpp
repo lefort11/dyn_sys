@@ -37,40 +37,45 @@ MainWindow::MainWindow(wxString const& title, wxPoint const& pos, wxSize const& 
 									  wxSize(X(30), Y(30)));
 	inputText->Show(true);
 
-	auto a1Text = new wxStaticText(pInputPanel, wxID_ANY, wxT("A1"), wxPoint(X(50), Y(60)),
+	auto e1Text = new wxStaticText(pInputPanel, wxID_ANY, wxT("E1"), wxPoint(X(50), Y(30)),
 								   wxSize(X(30), Y(30)));
-	a1Text->Show(true);
+	e1Text->Show(true);
 
-	auto b1Text = new wxStaticText(pInputPanel, wxID_ANY, wxT("B1"), wxPoint(X(130), Y(60)),
+	auto e2Text = new wxStaticText(pInputPanel, wxID_ANY, wxT("E2"), wxPoint(X(130), Y(30)),
 								   wxSize(X(30), Y(30)));
-	b1Text->Show(true);
+	e2Text->Show(true);
 
-	auto a2Text = new wxStaticText(pInputPanel, wxID_ANY, wxT("A2"), wxPoint(X(50), Y(130)),
+	auto rText = new wxStaticText(pInputPanel, wxID_ANY, wxT("R"), wxPoint(X(50), Y(90)),
 								   wxSize(X(30), Y(30)));
-	a2Text->Show(true);
+	rText->Show(true);
 
-	auto b2Text = new wxStaticText(pInputPanel, wxID_ANY, wxT("B2"), wxPoint(X(130), Y(130)),
+	auto v0Text = new wxStaticText(pInputPanel, wxID_ANY, wxT("V0"), wxPoint(X(130), Y(90)),
 								   wxSize(X(30), Y(30)));
-	b2Text->Show(true);
+	v0Text->Show(true);
+
+	auto cText = new wxStaticText(pInputPanel, wxID_ANY, wxT("C"), wxPoint(X(95), Y(150)));
+	cText->Show(true);
 
 
-	auto a1Box = new wxTextCtrl(pInputPanel, ID_A1_BOX, "0", wxPoint(X(40), Y(80)),
+	auto cBox = new wxTextCtrl(pInputPanel, ID_C_BOX, "0", wxPoint(X(80), Y(170)), wxSize(X(60), Y(20)));
+
+	auto e1Box = new wxTextCtrl(pInputPanel, ID_E1_BOX, "0", wxPoint(X(40), Y(50)),
 								wxSize(X(60), Y(20)));
-	a1Box->Show(true);
+	e1Box->Show(true);
 
-	auto b1Box = new wxTextCtrl(pInputPanel, ID_B1_BOX, "0", wxPoint(X(120), Y(80)), wxSize(X(60), Y(20)));
-	b1Box->Show(true);
+	auto e2Box = new wxTextCtrl(pInputPanel, ID_E2_BOX, "0", wxPoint(X(120), Y(50)), wxSize(X(60), Y(20)));
+	e2Box->Show(true);
 
-	auto a2Box = new wxTextCtrl(pInputPanel, ID_A2_BOX, "0", wxPoint(X(40), Y(150)), wxSize(X(60), Y(20)));
-	a2Box->Show(true);
+	auto rBox = new wxTextCtrl(pInputPanel, ID_R_BOX, "0", wxPoint(X(40), Y(110)), wxSize(X(60), Y(20)));
+	rBox->Show(true);
 
-	auto b2Box = new wxTextCtrl(pInputPanel, ID_B2_BOX, "0", wxPoint(X(120), Y(150)), wxSize(X(60), Y(20)));
-	b2Box->Show(true);
+	auto v0Box = new wxTextCtrl(pInputPanel, ID_V0_BOX, "0", wxPoint(X(120), Y(110)), wxSize(X(60), Y(20)));
+	v0Box->Show(true);
 
-	auto epsText = new wxStaticText(pInputPanel, wxID_ANY, wxT("Eps"), wxPoint(X(95), Y(200)), wxSize(X(30), Y(30)));
+	auto epsText = new wxStaticText(pInputPanel, wxID_ANY, wxT("Eps"), wxPoint(X(95), Y(210)), wxSize(X(30), Y(30)));
 	epsText->Show(true);
 
-	auto epsBox = new wxTextCtrl(pInputPanel, ID_EPS_BOX, "0", wxPoint(X(80), Y(220)), wxSize(X(60), Y(20)));
+	auto epsBox = new wxTextCtrl(pInputPanel, ID_EPS_BOX, "0", wxPoint(X(80), Y(230)), wxSize(X(60), Y(20)));
 	epsBox->Show(true);
 
 	auto tnText = new wxStaticText(pInputPanel, wxID_ANY, wxT("Tn"), wxPoint(X(50), Y(270)), wxSize(X(30), Y(30)));
@@ -84,9 +89,9 @@ MainWindow::MainWindow(wxString const& title, wxPoint const& pos, wxSize const& 
 	auto tkBox = new wxTextCtrl(pInputPanel, ID_TK_BOX, "0", wxPoint(X(120), Y(290)), wxSize(X(60), Y(20)));
 	tkBox->Show(true);
 
-	auto NText = new wxStaticText(pInputPanel, wxID_ANY, wxT("N"), wxPoint(X(95), Y(340)), wxSize(X(60), Y(30)));
+	auto NText = new wxStaticText(pInputPanel, wxID_ANY, wxT("N"), wxPoint(X(95), Y(330)), wxSize(X(60), Y(30)));
 	NText->Show(true);
-	auto NBox = new wxTextCtrl(pInputPanel, ID_N_BOX, "0", wxPoint(80, 360), wxSize(60, 20));
+	auto NBox = new wxTextCtrl(pInputPanel, ID_N_BOX, "0", wxPoint(80, 350), wxSize(60, 20));
 	NBox->Show(true);
 
 	auto calcButton = new wxButton(this, ID_RECALCULATE, wxT("Calculate"), wxPoint(X(40), Y(500)), wxSize(X(140),Y(30)));

@@ -4,10 +4,11 @@
 wxBEGIN_EVENT_TABLE(Application, wxApp)
 				EVT_BUTTON(ID_RECALCULATE, Application::OnCalculate)
 				EVT_BUTTON(ID_CLEAR, Application::OnClear)
-				EVT_TEXT(ID_A1_BOX, Application::OnA1TextChanged)
-				EVT_TEXT(ID_A2_BOX, Application::OnA2TextChanged)
-				EVT_TEXT(ID_B1_BOX, Application::OnB1TextChanged)
-				EVT_TEXT(ID_B2_BOX, Application::OnB2TextChanged)
+				EVT_TEXT(ID_E1_BOX, Application::OnE1TextChanged)
+				EVT_TEXT(ID_R_BOX, Application::OnRTextChanged)
+				EVT_TEXT(ID_E2_BOX, Application::OnE2TextChanged)
+				EVT_TEXT(ID_V0_BOX, Application::OnV0TextChanged)
+				EVT_TEXT(ID_C_BOX, Application::OnCTextChanged)
 				EVT_TEXT(ID_EPS_BOX, Application::OnEpsTextChanged)
 				EVT_TEXT(ID_TN_BOX, Application::OnTnTextChanged)
 				EVT_TEXT(ID_TK_BOX, Application::OnTkTextChanged)
@@ -15,7 +16,7 @@ wxBEGIN_EVENT_TABLE(Application, wxApp)
 wxEND_EVENT_TABLE()
 
 
-Application::Application(): m_A1(0), m_A2(0), m_B1(0), m_B2(0), m_eps(0), m_Tn(0), m_Tk(0), m_N(0)
+Application::Application(): m_E1(0), m_R(0), m_E2(0), m_V0(0), m_eps(0), m_Tn(0), m_Tk(0), m_N(0), m_C(0)
 {}
 
 Application::~Application()
@@ -24,7 +25,7 @@ Application::~Application()
 
 bool Application::OnInit()
 {
-	m_pFrame = new MainWindow( "Culture Evolution Model", wxPoint(50, 50), wxSize(800, 600) );
+	m_pFrame = new MainWindow( "Trophic Chain Model", wxPoint(50, 50), wxSize(800, 600) );
 	m_pFrame->Show( true );
 	m_pFrame->SetBackgroundColour(wxColour(220, 220, 220));
 
@@ -33,20 +34,22 @@ bool Application::OnInit()
 
 void Application::OnCalculate(wxCommandEvent &event)
 {
-	if((m_A1 == 0) || (m_A2 == 0) || (m_B1 == 0) || (m_B2 == 0))
+	if((m_E1 == 0) || (m_R == 0) || (m_E2 == 0) || (m_V0 == 0))
 	{
 		m_pFrame->ErrorDialog();
 		return;
 	}
 
-	CultureEvolutionModel* ceModel = new CultureEvolutionModel(m_A1, m_A2, m_B1, m_B2,
-															   m_B2 / m_A2 + m_eps,
-															   m_B1 / m_A1 + m_eps);
+	double y0_1 = m_E2 * m_R / (1 - m_E2);
+	double y0_2 = (m_V0 * (m_C - y0_1) - m_E1) * (m_R + y0_1) / (m_V0 * (m_R + y0_1) + 1);
+
+	TrophicChainModel* trophicChainModel = new TrophicChainModel(m_E1, m_E2, m_R, m_V0, m_C,
+																 y0_1 + m_eps, y0_2 + m_eps);
 
 
-	m_pFrame->SetStatPoint(m_B2/m_A2, m_B1/m_A1);
+	m_pFrame->SetStatPoint(y0_1, y0_2);
 
-	auto rkMeth = new RungeKuttaMethod(m_N, m_Tn, m_Tk, ceModel);
+	auto rkMeth = new RungeKuttaMethod(m_N, m_Tn, m_Tk, trophicChainModel);
 
 	std::vector<double> y1, y2;
 
@@ -93,24 +96,29 @@ void Application::OnClear(wxCommandEvent &event)
 	}
 }
 
-void Application::OnA1TextChanged(wxCommandEvent &event)
+void Application::OnE1TextChanged(wxCommandEvent &event)
 {
-	event.GetString().ToDouble(&m_A1);
+	event.GetString().ToDouble(&m_E1);
 }
 
-void Application::OnA2TextChanged(wxCommandEvent &event)
+void Application::OnRTextChanged(wxCommandEvent &event)
 {
-	event.GetString().ToDouble(&m_A2);
+	event.GetString().ToDouble(&m_R);
 }
 
-void Application::OnB1TextChanged(wxCommandEvent &event)
+void Application::OnE2TextChanged(wxCommandEvent &event)
 {
-	event.GetString().ToDouble(&m_B1);
+	event.GetString().ToDouble(&m_E2);
 }
 
-void Application::OnB2TextChanged(wxCommandEvent &event)
+void Application::OnV0TextChanged(wxCommandEvent &event)
 {
-	event.GetString().ToDouble(&m_B2);
+	event.GetString().ToDouble(&m_V0);
+}
+
+void Application::OnCTextChanged(wxCommandEvent &event)
+{
+	event.GetString().ToDouble(&m_C);
 }
 
 void Application::OnTkTextChanged(wxCommandEvent &event)

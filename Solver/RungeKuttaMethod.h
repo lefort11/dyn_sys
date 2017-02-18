@@ -6,7 +6,7 @@
 #include <vector>
 #include <array>
 
-#include "CultureEvolutionModel.h"
+#include "TrophicChainModel.h"
 
 class RungeKuttaMethod
 {

@@ -19,7 +19,7 @@ set( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${WXWIDGETS_CXX_FLAGS}" 
 
 
 #set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}")
-set(SOURCE_FILES main.cpp GUI/Window.cpp GUI/Window.h GUI/Window.cpp GUI/Window.h Solver/RungeKuttaMethod.cpp Solver/RungeKuttaMethod.h Solver/CultureEvolutionModel.cpp Solver/CultureEvolutionModel.h GUI/XYChart.cpp GUI/XYChart.h Application.cpp Application.h)
+set(SOURCE_FILES main.cpp GUI/Window.cpp GUI/Window.h GUI/Window.cpp GUI/Window.h Solver/RungeKuttaMethod.cpp Solver/RungeKuttaMethod.h Solver/TrophicChainModel.cpp Solver/TrophicChainModel.h GUI/XYChart.cpp GUI/XYChart.h Application.cpp Application.h)
 
 set(wxWidgets_USE_STATIC ON)
 
