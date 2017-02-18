@@ -13,10 +13,12 @@ wxBEGIN_EVENT_TABLE(Application, wxApp)
 				EVT_TEXT(ID_TN_BOX, Application::OnTnTextChanged)
 				EVT_TEXT(ID_TK_BOX, Application::OnTkTextChanged)
 				EVT_TEXT(ID_N_BOX, Application::OnNTextChanged)
+				EVT_LISTBOX(ID_LIST_BOX, Application::OnColorChanged)
 wxEND_EVENT_TABLE()
 
 
-Application::Application(): m_E1(0), m_R(0), m_E2(0), m_V0(0), m_eps(0), m_Tn(0), m_Tk(0), m_N(0), m_C(0)
+Application::Application(): m_E1(0), m_R(0), m_E2(0), m_V0(0), m_eps(0), m_Tn(0), m_Tk(0), m_N(0), m_C(0),
+							m_Color(*wxBLUE)
 {}
 
 Application::~Application()
@@ -58,7 +60,7 @@ void Application::OnCalculate(wxCommandEvent &event)
 	auto y1y2Func = new mpFXYVector();
 	y1y2Func->SetData(y1, y2);
 	y1y2Func->SetContinuity(true);
-	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
+	wxPen vectorpen(m_Color, 2, wxSOLID);
 	y1y2Func->SetPen(vectorpen);
 	y1y2Func->SetDrawOutsideMargins(false);
 
@@ -139,5 +141,16 @@ void Application::OnEpsTextChanged(wxCommandEvent &event)
 void Application::OnNTextChanged(wxCommandEvent &event)
 {
 	m_N = static_cast<unsigned>(wxAtoi(event.GetString()));
+}
+
+void Application::OnColorChanged(wxCommandEvent &event)
+{
+	auto string = event.GetString();
+	if(string == "Red")
+		m_Color = *wxRED;
+	else if(string == "Blue")
+		m_Color = *wxBLUE;
+	else
+		m_Color = *wxGREEN;
 }
 

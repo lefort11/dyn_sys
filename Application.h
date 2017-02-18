@@ -16,6 +16,8 @@ class Application: public wxApp
 	double m_E1, m_R, m_E2, m_V0, m_eps, m_Tn, m_Tk, m_C;
 	unsigned m_N;
 
+	wxColour m_Color;
+
 public:
 	Application();
 
@@ -37,6 +39,7 @@ private:
 	void OnEpsTextChanged(wxCommandEvent& event);
 	void OnCTextChanged(wxCommandEvent& event);
 	void OnNTextChanged(wxCommandEvent& event);
+	void OnColorChanged(wxCommandEvent& event);
 	void OnCalculate(wxCommandEvent& event);
 	void OnClear(wxCommandEvent& event);
 

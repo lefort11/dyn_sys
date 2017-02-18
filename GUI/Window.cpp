@@ -121,8 +121,16 @@ MainWindow::MainWindow(wxString const& title, wxPoint const& pos, wxSize const& 
 	showY1Y2Plot->Show(true);
 
 
-	m_pStatPointText = new wxStaticText(this, wxID_ANY, wxT("Stationary Point:\ny1 = undefined\ny2 = undefined"),
+	m_pStatPointText = new wxStaticText(pInputPanel, wxID_ANY, wxT("Stationary Point:\ny1 = undefined\ny2 = undefined"),
 										wxPoint(X(45), Y(390)));
+
+	wxArrayString list;
+	list.Add(wxT("Blue"), 1);
+	list.Add(wxT("Red"), 1);
+	list.Add(wxT("Green"), 1);
+	auto pListBox = new wxListBox(pInputPanel, ID_LIST_BOX, wxPoint(X(45), Y(450)), wxSize(X(140), Y(50)), list,
+								  wxLB_SINGLE);
+	pListBox->SetSelection(0);
 
 
 	m_pFirstXYChart = new XYChart(this, nullptr, wxPoint(X(300), Y(0)), wxSize(X(500), X(500)), "y1", "y2");
