@@ -23,7 +23,7 @@ set(SOURCE_FILES main.cpp GUI/Window.cpp GUI/Window.h GUI/Window.cpp GUI/Window.
 
 set(wxWidgets_USE_STATIC ON)
 
-add_executable(dyn_sys ${SOURCE_FILES})
+add_executable(dyn_sys MACOSX_BUNDLE ${SOURCE_FILES})
 target_link_libraries(dyn_sys ${wxWidgets_LIBRARIES} ${wxMATHPLOT_LIBRARY})
 
 set(BUNDLE_NAME dyn_sys.app)
@@ -40,8 +40,7 @@ install(TARGETS dyn_sys
         RUNTIME DESTINATION ${BINDIR}
         LIBRARY DESTINATION ${LIBDIR}
         ARCHIVE DESTINATION ${LIBDIR}
-        BUNDLE DESTINATION ${CMAKE_SOURCE_DIR}
-        PERMISSIONS WORLD_WRITE WORLD_READ WORLD_EXECUTE)
+        BUNDLE DESTINATION ${CMAKE_SOURCE_DIR})
 
 #file(GLOB_RECURSE WXPLUGINS_ONE
  #       \"\${CMAKE_INSTALL_PREFIX}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
@@ -57,6 +56,5 @@ INSTALL(CODE "
     file(GLOB_RECURSE WXPLUGINS
     \"\${CMAKE_INSTALL_PREFIX}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
    include(BundleUtilities)
-   fixup_bundle(\"${APPS}\"   \"\"   \"${DIRS}\")
-   " COMPONENT Runtime
-        PERMISSIONS WORLD_WRITE WORLD_READ_WORLD_EXECUTE)
+   fixup_bundle(\"${APPS}\"   \"\"   \"${DIRS}\")"
+        COMPONENT Runtime)

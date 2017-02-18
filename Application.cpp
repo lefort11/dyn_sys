@@ -52,7 +52,6 @@ void Application::OnCalculate(wxCommandEvent &event)
 
 	rkMeth->Solve(y1, y2);
 
-
 	auto y1y2Func = new mpFXYVector();
 	y1y2Func->SetData(y1, y2);
 	y1y2Func->SetContinuity(true);
