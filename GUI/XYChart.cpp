@@ -1,7 +1,3 @@
-//
-// Created by Gleb Plaksin on 15.02.17.
-//
-
 #include "XYChart.h"
 
 XYChart::XYChart(wxWindow* parent, mpFXY* function, const wxPoint &pos, const wxSize &size, wxString const& xName,
@@ -50,7 +46,6 @@ void XYChart::ChangeDataset(mpFXY* function)
 
 void XYChart::Clear()
 {
-	auto k = m_pPlot->CountAllLayers();
 	for(int i = m_pPlot->CountAllLayers() - 1; i >= 2; --i)
 	{
 		m_pPlot->DelLayer(m_pPlot->GetLayer(i));

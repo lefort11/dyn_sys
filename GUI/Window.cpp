@@ -142,7 +142,8 @@ MainWindow::MainWindow(wxString const& title, wxPoint const& pos, wxSize const& 
 
 
 	Centre();
-
+#undef X(a)
+#undef Y(a)
 }
 
 MainWindow::~MainWindow()
